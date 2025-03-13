@@ -2877,7 +2877,7 @@ img {
   }
 }
 .wpo-site-header .navbar-header .navbar-brand img {
-  max-width: 170px;
+  max-width: 255px;
 }
 @media (max-width: 991px) {
   .wpo-site-header .navbar-collapse.collapse {

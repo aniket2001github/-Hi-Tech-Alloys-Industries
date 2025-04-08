@@ -1,6 +1,6 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $to = "sales@hitechalloyind.com"; // Your destination email
+    $to = "sales@hitechalloyind.com";
     $from = isset($_POST['email']) ? $_POST['email'] : '';
     $sender_name = isset($_POST['name']) ? $_POST['name'] : 'No Name';
     $address = isset($_POST['address']) ? $_POST['address'] : 'No Address';
@@ -17,9 +17,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $headers .= "Reply-To: $from\r\n";
 
     if (mail($to, $subject, $message, $headers)) {
-        echo "success";
+        // Redirect to your main website after success
+        header("Location: https://www.hitechalloyind.com");
+        exit();
     } else {
-        echo "error";
+        echo "There was an error sending your message. Please try again later.";
     }
 }
 ?>

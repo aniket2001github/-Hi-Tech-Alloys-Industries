@@ -1,17 +1,25 @@
 <?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $to = "sales@hitechalloyind.com"; // Your destination email
+    $from = isset($_POST['email']) ? $_POST['email'] : '';
+    $sender_name = isset($_POST['name']) ? $_POST['name'] : 'No Name';
+    $address = isset($_POST['address']) ? $_POST['address'] : 'No Address';
+    $service = isset($_POST['service']) ? $_POST['service'] : 'Not Specified';
+    $note = isset($_POST['note']) ? $_POST['note'] : '';
 
-	$to = "wpoceanmarketing@gmail.com"; // this is your Email address
-	$from  = $_POST['email']; // this is the sender's Email address
-	$sender_name = $_POST['name'];
-	$adress = $_POST['adress'];
-	$service = $_POST['service'];
-	$note = $_POST['note'];
+    $subject = "New Contact Form Submission from $sender_name";
+    $message = "$sender_name has sent a contact message.\n\n".
+               "Service Interested: $service\n".
+               "Address: $address\n\n".
+               "Message:\n$note";
 
-	$subject = "Form submission";
+    $headers = "From: $from\r\n";
+    $headers .= "Reply-To: $from\r\n";
 
-	$message = $sender_name . " has send the contact message. His / Her contact Service is " . $service . " and his / her adress is "  . $adress . ". He / she wrote the following... ". "\n\n" . $note;
-
-	$headers = 'From: ' . $from;
-	mail($to, $subject, $message, $headers);
-
+    if (mail($to, $subject, $message, $headers)) {
+        echo "success";
+    } else {
+        echo "error";
+    }
+}
 ?>
